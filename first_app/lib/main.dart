@@ -4,9 +4,15 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
-  String buttonName = "click";
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int buttonName = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +24,11 @@ class MyApp extends StatelessWidget {
         body: Center(
             child: ElevatedButton(
                 onPressed: () {
-                  buttonName = "clicked";
+                  setState(() {
+                    buttonName++;
+                  });
                 },
-                child: Text(buttonName))),
+                child: Text("$buttonName"))),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
