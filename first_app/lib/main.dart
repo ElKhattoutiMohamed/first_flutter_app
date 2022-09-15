@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,28 +24,35 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("Title"),
         ),
-        body: SizedBox(
-          height: ,
-          child: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      buttonName++;
-                    });
-                  },
-                  child: Text("$buttonName")),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      buttonName++;
-                    });
-                  },
-                  child: Text("$buttonName")),
-            ],
-          )),
+        body: Center(
+          child: currentIndex == 0
+              ? Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.cyan,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          onPressed: () {
+                            setState(() {
+                              buttonName++;
+                            });
+                          },
+                          child: Text("$buttonName")),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              buttonName++;
+                            });
+                          },
+                          child: Text("$buttonName")),
+                    ],
+                  ),
+                )
+              : Image.asset('assets/images/01.png'),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
