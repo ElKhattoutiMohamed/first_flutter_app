@@ -19,59 +19,75 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Title"),
-        ),
-        body: Center(
-          child: currentIndex == 0
-              ? Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: Colors.cyan,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
-                          onPressed: () {
-                            setState(() {
-                              buttonName++;
-                            });
-                          },
-                          child: Text("$buttonName")),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              buttonName++;
-                            });
-                          },
-                          child: Text("$buttonName")),
-                    ],
-                  ),
-                )
-              : Image.asset('assets/images/01.png'),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
-            BottomNavigationBarItem(
-                label: 'Settings', icon: Icon(Icons.settings))
-          ],
-          currentIndex: currentIndex,
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
-      ),
+    return const MaterialApp(
+      home: FirstPage(),
       debugShowCheckedModeBanner: false,
+      title: "TestApp",
     );
   }
 }
+
+class FirstPage extends StatelessWidget {
+  const FirstPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Title"),
+      ),
+      body: Center(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.green,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                  onPressed: () {},
+                  child: const Text("rien")),
+              ElevatedButton(onPressed: () {}, child: const Text("rien")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const SecondPage(),
+                      ),
+                    );
+                  },
+                  child: const Text("Next Page")),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
+          BottomNavigationBarItem(label: 'Settings', icon: Icon(Icons.settings))
+        ],
+        currentIndex: 0,
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
+      body: const Text("test"),
+    );
+  }
+}
+
 
 
 /*
